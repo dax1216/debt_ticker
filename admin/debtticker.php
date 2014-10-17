@@ -1,22 +1,12 @@
 <?php
-/**
- * Ticker Module
- * 
- * @package    Joomla.Site
- * @subpackage mod_ticker
- * @link 
- * @license        GNU/GPL, see LICENSE.php
- * mod_helloworld is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- */
- 
-// no direct access
+// No direct access to this file
 defined('_JEXEC') or die;
-// Include the syndicate functions only once
-require_once( dirname(__FILE__) . '/helper.php' );
  
-$hello = modTickerHelper::getHello($params);
-require( JModuleHelper::getLayoutPath('mod_ticker'));
-?>
+// Get an instance of the controller prefixed by HelloWorld
+$controller = JControllerLegacy::getInstance('DebtTicker');
+ 
+// Perform the Request task and Execute request task
+$controller->execute(JFactory::getApplication()->input->getCmd('task'));
+ 
+// Redirect if set by the controller
+$controller->redirect();
