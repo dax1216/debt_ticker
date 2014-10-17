@@ -18,6 +18,19 @@ jimport('joomla.application.component.controller');
  *
  * @since   0.0.1
  */
+define('INIT_VALUE', 400000000);
+define('SEC_IN_A_YR', 31104000);
+define('DATE_START', '2014-10-16 00:00:00');
+
 class DebtTickerController extends JControllerLegacy
 {
+
+   public function set_debt_value() {
+      $datetime = date('Y-m-d H:i:s');
+      $seconds = strtotime($datetime) - strtotime(DATE_START);
+      $rate = $this->_get_latest_rate();
+      $debt_value = INIT_VALUE * (1 + $rate * ($seconds / SEC_IN_A_YR));
+
+
+   }
 }
