@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" version="3.3" method="upgrade">
+   <name>COM_DEBTTICKER</name>
+   <author>Dax Panganiban</author>
+   <version>1.0.0</version>
+   <description>Custom component to display debt ticker.</description>
+      
+   <install>
+     <sql>
+         <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>         
+     </sql>
+   </install>
+
+   <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>            
+        </sql>
+   </uninstall>
+   
+   <update> <!-- Runs on update; New in 2.5 -->
+      <schemas>
+         <schemapath type="mysql">sql/updates/mysql</schemapath>
+      </schemas>
+   </update>
+   
+   <files folder="site">
+      <filename>index.html</filename>
+      <filename>debtticker.php</filename>
+      <filename>controller.php</filename>
+      <folder>views</folder>
+      <folder>models</folder>
+      <folder>language</folder>  
+   </files>
+  
+   <administration>
+      <!-- Administration Menu Section -->
+      <menu>COM_DEBTTICKER_MENU</menu>
+      <!-- Administration Main File Copy Section -->
+      <!-- Note the folder attribute: This attribute describes the folder
+              to copy FROM in the package to install therefore files copied
+              in this section are copied from /admin/ in the package -->
+      <files folder="admin">
+        <!-- Admin Main File Copy Section -->
+        <filename>index.html</filename>
+        <filename>debtticker.php</filename>
+        <!-- SQL files section -->
+         <filename>controller.php</filename>
+        <folder>sql</folder>
+        <folder>tables</folder>
+        <folder>models</folder>
+        <!-- views files section -->
+        <folder>views</folder>
+        <folder>language</folder>  
+      </files>
+   </administration>
+
+
+</extension>

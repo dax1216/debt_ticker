@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.3" client="site" method="upgrade">
+    <name>MOD_DEBTTICKER</name>
+    <author>Dax Panganiban</author>
+    <creationDate>October 2014</creationDate>
+    <copyright>Copyright (C) 2014</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>dax1216@gmail.com</authorEmail>    
+    <version>1.0</version>
+    <description>module for liability counter</description>
+    <files>
+        <file>helper.php</file>
+        <file module="mod_debtticker">mod_debtticker.php</file>
+        <folder>tmpl</folder>        
+    </files>
+    <languages destination="mod_debtticker" folder="language">
+        <language tag="en-GB">en-GB/en-GB.mod_debtticker.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_debtticker.ini</language>
+    </languages>
+    <media destination="mod_debtticker" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/administrator/components/com_debtticker/models/fields">
+                <field
+                        name="recentupdate"
+                        type="recentupdate"
+                        label="MOD_DEBTTICKER_LAST_RATE_UPDATE"
+                        readonly="readonly"
+                        description="">
+                </field>
+                <field
+                        name="rate"
+                        type="rate"
+                        readonly="readonly"
+                        label="MOD_DEBTTICKER_RATE_LABEL"
+                        description="">
+                </field>
+                <field
+                        name="currentliabilities"
+                        type="currentliabilities"
+                        readonly="readonly"
+                        label="MOD_DEBTTICKER_CURRENT_LIABILITIES"
+                        description="">
+                </field>
+                <field
+                        name="text_before"
+                        type="text"
+                        default=""
+                        label="MOD_DEBTTICKER_TEXTBEFORE_LABEL"
+                        description="">
+                </field>
+                <field
+                        name="text_after"
+                        type="text"
+                        default=""
+                        label="MOD_DEBTTICKER_TEXTAFTER_LABEL"
+                        description="">
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
