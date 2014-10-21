@@ -5,7 +5,7 @@
   *vertical-align: auto;
   *zoom: 1;
   *display: inline;
-  position: relative;
+  position: relative;  
 }
 .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-train-station .odometer-digit {
   display: inline-block;
@@ -83,6 +83,7 @@
 
 .odometer.odometer-auto-theme, .odometer.odometer-theme-train-station {
   font-family: "Economica", sans-serif;
+  font-size: 22px;
 }
 .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-train-station .odometer-digit {
   display: inline-block;

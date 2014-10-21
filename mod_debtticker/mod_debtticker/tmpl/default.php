@@ -26,11 +26,11 @@ $doc->addScript( JUri::root() . '/media/mod_debtticker/js/odometer.js' );
    });
    var seconds = <?= $seconds?>;
    
-   var dttimer = setInterval( function() { setDebtValue() }, 3000);
+   var dttimer = setInterval( function() { setDebtValue() }, 5000);
    
    function setDebtValue() {
       debt_value = 400000000 * (1 + <?=$recentRate['rate']?> * ( seconds / 31104000));
-      seconds += 3000;
+      seconds += 5;
       od.update(debt_value);      
    }
    

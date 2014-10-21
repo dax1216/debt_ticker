@@ -1,17 +1,17 @@
  <?xml version="1.0" encoding="UTF-8" ?>
  <extension type="package" version="3.3">
- <name>Debt Ticker Package</name>
- <author>Dax Panganiban</author>
- <creationDate>October 2014</creationDate>
- <packagename>debtticker</packagename>
- <version>1.0.0</version>
- <url></url>
- <packager>Debt Ticker</packager>
- <packagerurl></packagerurl>
- <description>Example package to combine multiple extensions</description>
- <update></update>
- <files folder="packages">
-   <file type="component" id="debtticker" >com_debtticker.zip</file>
-   <file type="module" id="debtticker" client="site">mod_debtticker.zip</file>   
- </files>
+    <name>Liability Ticker Package</name>
+    <author>Dax Panganiban</author>
+    <creationDate>October 2014</creationDate>
+    <packagename>debtticker</packagename>
+    <version>1.0.0</version>
+    <url></url>
+    <packager>Liability Ticker</packager>
+    <packagerurl></packagerurl>
+    <description>Example package to combine multiple extensions</description>
+    <update></update>
+    <files folder="packages">
+      <file type="component" id="com_debtticker" >com_debtticker.zip</file>
+      <file type="module" id="mode_debtticker" client="site">mod_debtticker.zip</file>
+    </files>
  </extension>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.3" client="site" method="upgrade">
-    <name>MOD_DEBTTICKER</name>
+    <name>Liability Ticker</name>
     <author>Dax Panganiban</author>
     <creationDate>October 2014</creationDate>
     <copyright>Copyright (C) 2014</copyright>
@@ -47,14 +47,14 @@
                 </field>
                 <field
                         name="text_before"
-                        type="text"
+                        type="textarea"
                         default=""
                         label="MOD_DEBTTICKER_TEXTBEFORE_LABEL"
                         description="">
                 </field>
                 <field
                         name="text_after"
-                        type="text"
+                        type="textarea"
                         default=""
                         label="MOD_DEBTTICKER_TEXTAFTER_LABEL"
                         description="">

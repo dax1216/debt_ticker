@@ -1,0 +1,4 @@
+1. Run the following cron scripts:
+	0	0	*	*	wget -O http://swap-linz.at/cms/index.php?option=com_debtticker&task=setRate
+	*  *  *  * wget -O http://swap-linz.at/cms/index.php?option=com_debtticker&task=setDebtValue
+

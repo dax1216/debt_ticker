@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `#__debtticker_ratelog`;
  
 CREATE TABLE `#__debtticker` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `current_liabilities` int(11) NOT NULL,
+  `current_liabilities` DECIMAL(11,2) NOT NULL,
   `start_date` DATETIME NULL,
    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;

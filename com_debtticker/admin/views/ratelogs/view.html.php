@@ -30,11 +30,12 @@ class DebtTickerViewRateLogs extends JViewLegacy
         $this->items = $items;
         $this->pagination = $pagination;
 
-        // Display the template
-        parent::display($tpl);
+        JToolBarHelper::title(JText::_('COM_DEBTTICKER') . ' ' . JText::_('COM_DEBTTICKER_RATELOGS'));
 
         // Set the document
         $this->setDocument();
+        // Display the template
+        parent::display($tpl);
     }
     
     protected function setDocument() 
