@@ -12,6 +12,9 @@ defined('_JEXEC') or die;
  
 // import Joomla controller library
 jimport('joomla.application.component.controller');
+
+jimport('joomla.html.parameter');
+jimport('joomla.application.module.helper');
  
 /**
  * Hello World Component Controller
@@ -32,36 +35,6 @@ class DebtTickerController extends JControllerLegacy
    public function setDebtValueDaily() {
       $datetime = date('Y-m-d H:i:s'); 
       
-      $debtTickerModel = $this->getModel('DebtTicker', 'DebtTickerModel');
-      $liabilityLogModel = $this->getModel('DebtTicker', 'LiabilityLogsModel');
-      $settings = $debtTickerModel->getSettings();                 
-      
-      if($settings['start_date'] != NULL && !empty($settings['start_date'])) {
-         $seconds = strtotime($datetime) - strtotime($settings['start_date']);
-      } else {
-         $seconds = 0;
-      }
-      
-      $rateLogModel = $this->getModel('RateLog', 'DebtTickerModel');
-      $recentRate = $rateLogModel->getRecentRate();            
-      
-      $debt_value = INIT_VALUE * (1 + $recentRate['rate'] * ($seconds / SEC_IN_A_YR));
-
-      $liabilityLogObj = new stdClass();
-      $liabilityLogModel->liability = $debt_value;
-
-      $liabilityLogModel->insertLog($liabilityLogModel);
-      
-      $newSettings = new stdClass();
-      $newSettings->id = 1;
-      
-      if($seconds == 0) {
-         $newSettings->start_date = date('Y-m-d H:i:s');
-      }
-      
-      $newSettings->current_liabilities = $debt_value;
-            
-      $debtTickerModel->updateSettings($newSettings);
       
       exit;
    }
@@ -71,26 +44,14 @@ class DebtTickerController extends JControllerLegacy
 
       $model = $this->getModel('RateLog', 'DebtTickerModel');
       
-      if(!empty($rateMatches) && !empty($rateDateMatches) && !empty($rateMatches[1]) && !empty($rateDateMatches[1])) {          
-          $model->insertRate($rateMatches[1], date('Y-m-d', strtotime(str_replace('/', '-', $rateDateMatches[1]))));
-      } else {
-          $recentRate = $model->getRecentRate();
-          $secondsDiff = time() - strtotime($recentRate['log_date']);
-          
-          if(floor($secondsDiff/3600/24) >= 5) {
-            $this->_sendEmail();
-          }
-      }
       exit;
    }
   
    public function getRates() {
-      $rateLogModel = $this->getModel('RateLog', 'DebtTickerModel');
-      $recentRate = $rateLogModel->getRecentRate();  
+      $module = JModuleHelper::getModule('mod_debtticker');
+      $moduleParams = new JRegistry();
+      $moduleParams->loadString($module->params);
       
-      header('Content-Type: application/json');
-      
-      echo json_encode($recentRate);
-      exit;
+      return array('interest_rate' => $moduleParams->get('interest_rate'), 'comp_interest_rate' => $moduleParams->get('comp_interest_rate'));
    }
 }
