@@ -32,6 +32,7 @@ class DebtTickerController extends JControllerLegacy
       $datetime = date('Y-m-d H:i:s'); 
       
       $debtTickerModel = $this->getModel('DebtTicker', 'DebtTickerModel');
+      $liabilityLogModel = $this->getModel('DebtTicker', 'LiabilityLogsModel');
       $settings = $debtTickerModel->getSettings();                 
       
       if($settings['start_date'] != NULL && !empty($settings['start_date'])) {
@@ -45,6 +46,11 @@ class DebtTickerController extends JControllerLegacy
       
       $debt_value = INIT_VALUE * (1 + $recentRate['rate'] * ($seconds / SEC_IN_A_YR));
 
+      $liabilityLogObj = new stdClass();
+      $liabilityLogModel->liability = $debt_value;
+
+      $liabilityLogModel->insertLog($liabilityLogModel);
+      
       $newSettings = new stdClass();
       $newSettings->id = 1;
       
