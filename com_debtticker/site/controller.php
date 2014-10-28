@@ -20,15 +20,16 @@ jimport('joomla.application.component.controller');
  */
 
 define('INIT_VALUE', 400000000);
-define('SEC_IN_A_YR', 31104000);
-define('RATE_URL', 'http://www.emmi-benchmarks.eu/euribor-eonia-org/about-eonia.html');
+define('MINUTES_IN_A_DAY', 1440);
+//define('SEC_IN_A_YR', 31104000);
+//define('RATE_URL', 'http://www.emmi-benchmarks.eu/euribor-eonia-org/about-eonia.html');
 
 set_time_limit(0);
 
 class DebtTickerController extends JControllerLegacy
 {
 
-   public function setDebtValue() {
+   public function setDebtValueDaily() {
       $datetime = date('Y-m-d H:i:s'); 
       
       $debtTickerModel = $this->getModel('DebtTicker', 'DebtTickerModel');
@@ -65,11 +66,8 @@ class DebtTickerController extends JControllerLegacy
       exit;
    }
 
-   public function setRate() {
+   public function setDebtValueMinutes() {
       $contents = file_get_contents(RATE_URL);    
-
-      preg_match("/<br\/>(-?[0-9]\d*(\.\d+))<br\/>/i", $contents, $rateMatches);
-      preg_match("/<br\/> \((\d{2}\/\d{2}\/\d{4})\)/i", $contents, $rateDateMatches);
 
       $model = $this->getModel('RateLog', 'DebtTickerModel');
       
@@ -85,33 +83,8 @@ class DebtTickerController extends JControllerLegacy
       }
       exit;
    }
-
-   protected function _sendEmail() {
-      $mailer = JFactory::getMailer();
-
-      $app = JFactory::getApplication();
-
-      $sender = array(
-         $app->get( 'mailfrom' ),
-         $app->get( 'fromname' ) );
-
-      $mailer->setSender($sender);
-
-      $mailer->addRecipient($app->get( 'mailfrom' ));
-
-      $body = "Component unable to retrieve interest rate from http://www.emmi-benchmarks.eu/euribor-eonia-org/about-eonia.html. Please contact developer for help.";
-      $mailer->setSubject('Joomla Debt Ticker notification');
-      $mailer->setBody($body);
-
-      $send = $mailer->Send();
-      if ( $send !== true ) {
-         echo 'Error sending email: ' . $send->__toString();
-      } else {
-         echo 'Mail sent';
-      }
-   }
-   
-   public function getRate() {
+  
+   public function getRates() {
       $rateLogModel = $this->getModel('RateLog', 'DebtTickerModel');
       $recentRate = $rateLogModel->getRecentRate();  
       
