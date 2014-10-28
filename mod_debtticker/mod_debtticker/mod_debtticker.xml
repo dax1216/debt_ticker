@@ -25,24 +25,31 @@
         <fields name="params">
             <fieldset name="basic" addfieldpath="/administrator/components/com_debtticker/models/fields">
                 <field
-                        name="recentupdate"
-                        type="recentupdate"
-                        label="MOD_DEBTTICKER_LAST_RATE_UPDATE"
+                        name="recentupdatedaily"
+                        type="recentupdatedaily"
+                        label="MOD_DEBTTICKER_DEBT_UPDATE_DAILY"
                         readonly="readonly"
                         description="">
                 </field>
                 <field
-                        name="rate"
-                        type="rate"
+                        name="recentupdateminutes"
+                        type="recentupdateminutes"
                         readonly="readonly"
-                        label="MOD_DEBTTICKER_RATE_LABEL"
+                        label="MOD_DEBTTICKER_DEBT_UPDATE_MINUTES"
                         description="">
                 </field>
                 <field
-                        name="currentliabilities"
-                        type="currentliabilities"
-                        readonly="readonly"
-                        label="MOD_DEBTTICKER_CURRENT_LIABILITIES"
+                        name="interest_rate"
+                        type="text"
+                        default=""
+                        label="MOD_DEBTTICKER_INTEREST_RATE_LABEL"
+                        description="">
+                </field>
+                <field
+                        name="comp_interest_rate"
+                        type="text"
+                        default=""
+                        label="MOD_DEBTTICKER_COMP_INTEREST_RATE_LABEL"
                         description="">
                 </field>
                 <field

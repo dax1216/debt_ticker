@@ -1,27 +1,21 @@
-DROP TABLE IF EXISTS `#__debtticker`;
 DROP TABLE IF EXISTS `#__debtticker_liabilitylogs`;
 DROP TABLE IF EXISTS `#__debtticker_ratelogs`;
  
-CREATE TABLE `#__debtticker` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `current_liabilities` DECIMAL(11,2) NOT NULL,
-  `start_date` DATETIME NULL,
-   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
- 
-INSERT INTO `#__debtticker` (`current_liabilities`) VALUES (400000000);
-
 CREATE TABLE `#__debtticker_liabilitylogs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `liability` DECIMAL(11,2) NOT NULL,
+  `liability` DECIMAL(13,2) NOT NULL,
+  `comp_rate` DECIMAL(11,3) NOT NULL,
   `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `#__debtticker_ratelogs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rate` varchar(25) NOT NULL,
+  `rate1` DECIMAL(11,2) NOT NULL,
+  `rate2` DECIMAL(11,2) NOT NULL,
+  `comp_rate` DECIMAL(11,2) NOT NULL,
   `rate_date` date NOT NULL,
+  `debit_value` DECIMAL(11,2) NOT NULL,
   `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
