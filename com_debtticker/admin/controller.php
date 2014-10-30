@@ -16,7 +16,7 @@ class DebtTickerController extends JControllerLegacy
     {
         // set default view if not set
         $input = JFactory::getApplication()->input;
-        $input->set('view', $input->getCmd('view', 'RateLogs'));
+        $input->set('view', $input->getCmd('view', 'DebtLogsDaily'));
 
         // call parent behavior
         parent::display($cachable);

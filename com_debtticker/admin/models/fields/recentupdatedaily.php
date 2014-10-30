@@ -9,7 +9,7 @@
 defined('JPATH_BASE') or die;
 
 
-class JFormFieldRecentUpdate extends JFormField
+class JFormFieldRecentUpdateDaily extends JFormField
 {
 	/**
 	 * The form field type.
@@ -17,7 +17,7 @@ class JFormFieldRecentUpdate extends JFormField
 	 * @var		string
 	 * @since   1.6
 	 */
-	protected $type = 'recentupdate';
+	protected $type = 'recentupdatedaily';
 
 	/**
 	 * Method to get the field input markup.
@@ -31,8 +31,8 @@ class JFormFieldRecentUpdate extends JFormField
       // Create a new query object.
       $query = $db->getQuery(true);
 
-      $query->select($db->quoteName(array('id', 'rate', 'rate_date', 'log_date')));
-      $query->from($db->quoteName('#__debtticker_ratelogs'));        
+      $query->select($db->quoteName(array('id', 'debt', 'rate_date', 'log_date')));
+      $query->from($db->quoteName('#__debtticker_debtlogsdaily'));        
       $query->order('log_date DESC');
 
       $db->setQuery($query);
@@ -40,7 +40,7 @@ class JFormFieldRecentUpdate extends JFormField
       $recentRate = $db->loadAssoc();
       return
 			'<input class="input-medium" type="text" name="' . $this->name . '" id="' . $this->id . '" value="'
-			. htmlspecialchars($recentRate['log_date']) . '" readonly="readonly" />';
+			. htmlspecialchars($recentRate['debt']) . '" readonly="readonly" />';
    }
    
 }

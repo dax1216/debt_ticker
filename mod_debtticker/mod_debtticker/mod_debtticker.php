@@ -19,10 +19,6 @@ require_once( dirname(__FILE__) . '/helper.php' );
  
 $recentRate = modDebtTickerHelper::getRecentRate();
 
-$comDebtTicker = modDebtTickerHelper::getSettings();
-
-$seconds = time() - strtotime($comDebtTicker['start_date']);
-
 $settings = modDebtTickerHelper::getData($params);
 
 require( JModuleHelper::getLayoutPath('mod_debtticker'));

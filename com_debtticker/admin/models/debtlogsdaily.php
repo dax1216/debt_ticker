@@ -6,7 +6,7 @@ jimport('joomla.application.component.modellist');
 /**
  * HelloWorldList Model
  */
-class DebtTickerModelRateLogs extends JModelList
+class DebtTickerModelDebtLogsDaily extends JModelList
 {
     /**
      * Method to build an SQL query to load the list data.
@@ -20,8 +20,8 @@ class DebtTickerModelRateLogs extends JModelList
         $query = $db->getQuery(true);
         // Select some fields from the hello table
         $query
-            ->select($db->quoteName(array('id', 'rate', 'rate_date')))
-            ->from('#__debtticker_ratelogs')
+            ->select($db->quoteName(array('id', 'rate', 'rateval1', 'rateval2', 'comp_rate', 'rate_date', 'debt')))
+            ->from('#__debtticker_debtlogsdaily')
             ->order('log_date DESC');
 
         return $query;

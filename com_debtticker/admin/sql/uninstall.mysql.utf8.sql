@@ -1,2 +1,2 @@
-DROP TABLE IF EXISTS `#__debtticker_liabilitylogs`;
-DROP TABLE IF EXISTS `#__debtticker_ratelogs`;
+DROP TABLE IF EXISTS `#__debtticker_debtlogsminutes`;
+DROP TABLE IF EXISTS `#__debtticker_debtlogsdaily`;

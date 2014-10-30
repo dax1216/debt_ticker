@@ -9,7 +9,7 @@
 defined('JPATH_BASE') or die;
 
 
-class JFormFieldCurrentLiabilities extends JFormField
+class JFormFieldRecentUpdateMinutes extends JFormField
 {
 	/**
 	 * The form field type.
@@ -17,7 +17,7 @@ class JFormFieldCurrentLiabilities extends JFormField
 	 * @var		string
 	 * @since   1.6
 	 */
-	protected $type = 'currentliabilities';
+	protected $type = 'recentupdateminutes';
 
 	/**
 	 * Method to get the field input markup.
@@ -28,16 +28,19 @@ class JFormFieldCurrentLiabilities extends JFormField
 	 */
 	protected function getInput() {
       $db = JFactory::getDbo(); 
+      // Create a new query object.
       $query = $db->getQuery(true);
-      $query->select($db->quoteName(array('id', 'current_liabilities')));
-      $query->from('#__debtticker');
-      $query->where($db->quoteName('id')." = ".$db->quote(1));
+
+      $query->select($db->quoteName(array('id', 'rate', 'debt', 'log_date')));
+      $query->from($db->quoteName('#__debtticker_debtlogsminutes'));        
+      $query->order('log_date DESC');
+
       $db->setQuery($query);
 
-      $options = $db->loadAssoc();
+      $recentRate = $db->loadAssoc();
       return
-			'<input class="input-small" type="text" name="' . $this->name . '" id="' . $this->id . '" value="'
-			. htmlspecialchars($options['current_liabilities']) . '" readonly="readonly" />';
+			'<input class="input-medium" type="text" name="' . $this->name . '" id="' . $this->id . '" value="'
+			. htmlspecialchars($recentRate['debt']) . '" readonly="readonly" />';
    }
    
 }

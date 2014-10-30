@@ -9,7 +9,7 @@ $doc->addScript( JUri::root() . '/media/mod_debtticker/js/odometer.js' );
 ?>
 <div class="dt-mod">
     <div class="dt-text-before"><?= $settings['text_before'] ?></div>
-    <div id="dt-display" class="odometer"><?=$comDebtTicker['current_liabilities']?></div>
+    <div id="dt-display" class="odometer"><?=$recentRate['debt']?></div>
     <div class="dt-text-before"><?= $settings['text_after'] ?></div>
 </div>
 
@@ -19,19 +19,12 @@ $doc->addScript( JUri::root() . '/media/mod_debtticker/js/odometer.js' );
    var od = new Odometer({
      el: elmdt,
      value: <?=$comDebtTicker['current_liabilities']?>,
-
+     duration: 2000,
      // Any option (other than auto and selector) can be passed in here
      format: '(,ddd)',
-     theme: 'train-station'
-   });
-   var seconds = <?= $seconds?>;
-   
-   var dttimer = setInterval( function() { setDebtValue() }, 5000);
-   
-   function setDebtValue() {
-      debt_value = 400000000 * (1 + <?=$recentRate['rate']?> * ( seconds / 31104000));
-      seconds += 5;
-      od.update(debt_value);      
-   }
+     theme: 'train-station',
+     animation: 'count',
+     auto: true
+   }); 
    
 </script>

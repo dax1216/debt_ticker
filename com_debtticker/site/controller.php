@@ -24,6 +24,8 @@ jimport('joomla.application.module.helper');
 
 define('INIT_VALUE', 400000000);
 define('MINUTES_IN_A_DAY', 1440);
+define('BASIS_RATE1', 397705109.71);
+define('BASIS_RATE2', 20031908.58);
 //define('SEC_IN_A_YR', 31104000);
 //define('RATE_URL', 'http://www.emmi-benchmarks.eu/euribor-eonia-org/about-eonia.html');
 
@@ -33,17 +35,26 @@ class DebtTickerController extends JControllerLegacy
 {
 
    public function setDebtValueDaily() {
-      $datetime = date('Y-m-d H:i:s'); 
+      $model = $this->getModel('DebtLogsDaily', 'DebtTickerModel');
       
+      $rates = $this->getRates();
+      
+      $obj = new stdClass();
+      $obj->rate_date = date('Y-m-d');
+      $obj->rate = $rates['interest_rate'];
+      $obj->comp_rate = $rates['comp_interest_rate'];
+      $obj->rate_val1 = BASIS_RATE1 * (1/360) * $rates['interest_rate'];
+      $obj->rate_val2 = BASIS_RATE2 * (1/360) * $rates['interest_rate'];
+      
+      $model->insertDailyLog($obj);
       
       exit;
    }
 
-   public function setDebtValueMinutes() {
-      $contents = file_get_contents(RATE_URL);    
+   public function setDebtValueMinutes() { 
+      $model = $this->getModel('DebtLogsMinutes', 'DebtTickerModel');
 
-      $model = $this->getModel('RateLog', 'DebtTickerModel');
-      
+      $model->insertMinuteLog();
       exit;
    }
   
