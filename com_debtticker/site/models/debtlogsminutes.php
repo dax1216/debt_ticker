@@ -11,7 +11,7 @@ jimport('joomla.application.component.modelitem');
 class DebtTickerModelDebtLogMinutes extends JModelItem
 {
     // Get a db connection.
-   public function insertMinuteLog($data) {
+   public function insertMinuteLog($rates) {
       $db = JFactory::getDbo();
       $query = $db->getQuery(true);
       
@@ -21,6 +21,12 @@ class DebtTickerModelDebtLogMinutes extends JModelItem
       $db->setQuery($query);
       
       $row = $db->loadRow();
+
+      $minutes = floor((time() - strtotime(date('Y-m-d 00:00:00'))) / 60);
+
+      $data = new stdClass();
+      $data->comp_rate_val = ($row[0] * $rates['comp_interest_rate'] / 360) / (1440 * $minutes);
+      $data->debt = $row[0] + $data->comp_rate_val;
       
       $result = $db->insertObject('#__debtticker_debtlogsminutes', $data);
    }

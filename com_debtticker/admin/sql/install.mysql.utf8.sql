@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `#__debtticker_debtlogsdaily`;
 CREATE TABLE `#__debtticker_debtlogsminutes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `debt` DECIMAL(13,2) NOT NULL,
-  `comp_rate` DECIMAL(11,3) NOT NULL,
+  `comp_rate_val` DECIMAL(11,3) NOT NULL,
   `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;

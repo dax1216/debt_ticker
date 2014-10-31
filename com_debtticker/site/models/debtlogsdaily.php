@@ -23,6 +23,8 @@ class DebtTickerModelDebtLogsDaily extends JModelItem
       $db->setQuery($query);
       
       $row = $db->loadRow();
+
+      var_dump($row);
       $data->comp_rate_val = ($row[0] + $data->rate_val1 + $data->rate_val2) * $data->comp_interest_rate / 360;
       $data->debt = $row[0] + $data->rate_val1 + $data->rate_val2 + $data->comp_rate_val;
       

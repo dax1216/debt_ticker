@@ -38,7 +38,7 @@ class DebtTickerController extends JControllerLegacy
       $model = $this->getModel('DebtLogsDaily', 'DebtTickerModel');
       
       $rates = $this->getRates();
-      
+      var_dump($rates);
       $obj = new stdClass();
       $obj->rate_date = date('Y-m-d');
       $obj->rate = $rates['interest_rate'];
@@ -54,7 +54,9 @@ class DebtTickerController extends JControllerLegacy
    public function setDebtValueMinutes() { 
       $model = $this->getModel('DebtLogsMinutes', 'DebtTickerModel');
 
-      $model->insertMinuteLog();
+      $rates = $this->getRates();
+
+      $model->insertMinuteLog($rates);
       exit;
    }
   

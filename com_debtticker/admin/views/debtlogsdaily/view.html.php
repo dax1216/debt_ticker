@@ -8,7 +8,7 @@ jimport('joomla.application.component.view');
 /**
  * HelloWorlds View
  */
-class DebtTickerViewRateLogs extends JViewLegacy
+class DebtTickerViewDebtLogsDaily extends JViewLegacy
 {
     /**
      * HelloWorlds view display method
@@ -30,7 +30,7 @@ class DebtTickerViewRateLogs extends JViewLegacy
         $this->items = $items;
         $this->pagination = $pagination;
 
-        JToolBarHelper::title(JText::_('COM_DEBTTICKER') . ' ' . JText::_('COM_DEBTTICKER_RATELOGS'));
+        JToolBarHelper::title(JText::_('COM_DEBTTICKER') . ' ' . JText::_('COM_DEBTTICKER_DEBTLOGSDAILY'));
 
         // Set the document
         $this->setDocument();
