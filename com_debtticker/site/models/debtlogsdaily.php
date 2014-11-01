@@ -3,6 +3,7 @@
 defined('_JEXEC') or die('Restricted access');
 // import the Joomla modellist library
 jimport('joomla.application.component.modellist');
+
 /**
  * HelloWorldList Model
  */
@@ -23,13 +24,16 @@ class DebtTickerModelDebtLogsDaily extends JModelItem
       $db->setQuery($query);
       
       $row = $db->loadRow();
-
-      var_dump($row);
-      $data->comp_rate_val = ($row[0] + $data->rate_val1 + $data->rate_val2) * $data->comp_interest_rate / 360;
-      $data->debt = $row[0] + $data->rate_val1 + $data->rate_val2 + $data->comp_rate_val;
+      
+      $total_sum = 0;
+      
+      if(!empty($row[0])) $total_sum = $row[0];
+      
+      $data->comp_rate_val = round(($total_sum + $data->rate_val1 + $data->rate_val2) * $data->comp_rate / 360, 2);
+      
+      $data->debt = round($total_sum + $data->rate_val1 + $data->rate_val2 + $data->comp_rate_val, 2);
       
       $result = $db->insertObject('#__debtticker_debtlogsdaily', $data);
    }
-
 
 }

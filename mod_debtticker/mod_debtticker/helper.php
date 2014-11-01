@@ -22,7 +22,7 @@ class ModDebtTickerHelper
       // Create a new query object.
       $query = $db->getQuery(true);
 
-      $query->select($db->quoteName(array('id', 'rate', 'debt', 'log_date')));
+      $query->select($db->quoteName(array('id', 'debt', 'log_date')));
       $query->from($db->quoteName('#__debtticker_debtlogsminutes'));        
       $query->order('log_date DESC');
 

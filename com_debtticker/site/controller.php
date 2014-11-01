@@ -13,21 +13,15 @@ defined('_JEXEC') or die;
 // import Joomla controller library
 jimport('joomla.application.component.controller');
 
-jimport('joomla.html.parameter');
-jimport('joomla.application.module.helper');
- 
+
 /**
  * Hello World Component Controller
  *
  * @since   0.0.1
  */
 
-define('INIT_VALUE', 400000000);
-define('MINUTES_IN_A_DAY', 1440);
 define('BASIS_RATE1', 397705109.71);
 define('BASIS_RATE2', 20031908.58);
-//define('SEC_IN_A_YR', 31104000);
-//define('RATE_URL', 'http://www.emmi-benchmarks.eu/euribor-eonia-org/about-eonia.html');
 
 set_time_limit(0);
 
@@ -38,13 +32,18 @@ class DebtTickerController extends JControllerLegacy
       $model = $this->getModel('DebtLogsDaily', 'DebtTickerModel');
       
       $rates = $this->getRates();
-      var_dump($rates);
+      
+      if($rates === false) {
+         echo 'No rates set.';
+         exit;
+      }
+      
       $obj = new stdClass();
       $obj->rate_date = date('Y-m-d');
       $obj->rate = $rates['interest_rate'];
       $obj->comp_rate = $rates['comp_interest_rate'];
-      $obj->rate_val1 = BASIS_RATE1 * (1/360) * $rates['interest_rate'];
-      $obj->rate_val2 = BASIS_RATE2 * (1/360) * $rates['interest_rate'];
+      $obj->rate_val1 = round(BASIS_RATE1 * (1/360) * $rates['interest_rate'], 2);
+      $obj->rate_val2 = round(BASIS_RATE2 * (1/360) * $rates['interest_rate'], 2);
       
       $model->insertDailyLog($obj);
       
@@ -55,16 +54,33 @@ class DebtTickerController extends JControllerLegacy
       $model = $this->getModel('DebtLogsMinutes', 'DebtTickerModel');
 
       $rates = $this->getRates();
-
+      
+      if($rates === false) {
+         echo 'No rates set.';
+         exit;
+      }
+      
       $model->insertMinuteLog($rates);
       exit;
    }
   
    public function getRates() {
-      $module = JModuleHelper::getModule('mod_debtticker');
-      $moduleParams = new JRegistry();
-      $moduleParams->loadString($module->params);
+      $db = JFactory::getDbo();
+      $query = $db->getQuery(true);
       
-      return array('interest_rate' => $moduleParams->get('interest_rate'), 'comp_interest_rate' => $moduleParams->get('comp_interest_rate'));
+      $query->select(array('params') )
+            ->from($db->quoteName('#__modules'))
+            ->where($db->quoteName('module') . ' = ' . $db->quote('mod_debtticker'));
+      
+      $db->setQuery($query);
+      
+      $row = $db->loadRow();
+      if(isset($row[0]) && !empty($row[0])) {
+         $params = json_decode($row[0]);
+
+         return array('interest_rate' => (float) $params->interest_rate, 'comp_interest_rate' => (float) $params->comp_interest_rate);
+      } else {
+         return false;
+      }
    }
 }

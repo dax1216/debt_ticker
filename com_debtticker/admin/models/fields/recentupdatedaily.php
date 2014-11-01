@@ -40,7 +40,7 @@ class JFormFieldRecentUpdateDaily extends JFormField
       $recentRate = $db->loadAssoc();
       return
 			'<input class="input-medium" type="text" name="' . $this->name . '" id="' . $this->id . '" value="'
-			. htmlspecialchars($recentRate['debt']) . '" readonly="readonly" />';
+			. number_format($recentRate['debt'], 2) . '" readonly="readonly" />';
    }
    
 }

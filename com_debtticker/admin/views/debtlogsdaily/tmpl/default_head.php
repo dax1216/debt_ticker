@@ -6,7 +6,7 @@ defined('_JEXEC') or die('Restricted Access');
     <th width="100">
         <?php echo JText::_('COM_DEBTTICKER_DEBTTICKER_HEADING_DATE'); ?>
     </th>
-    <th>
+    <th width="100">
         <?php echo JText::_('COM_DEBTTICKER_DEBTTICKER_INTEREST_RATE'); ?>
     </th>
     <th width="150">
