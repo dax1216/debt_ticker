@@ -33,7 +33,7 @@ class JFormFieldRecentUpdateMinutes extends JFormField
 
       $query->select($db->quoteName(array('id', 'debt', 'log_date')));
       $query->from($db->quoteName('#__debtticker_debtlogsminutes'));        
-      $query->order('log_date DESC');
+      $query->order('id DESC');
 
       $db->setQuery($query);
 

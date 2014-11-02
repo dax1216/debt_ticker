@@ -17,7 +17,8 @@ class DebtTickerModelDebtLogsMinutes extends JModelItem
       $query = $db->getQuery(true);
       
       $query->select(array('SUM(rate_val1) + SUM(rate_val2) + SUM(comp_rate_val)') )
-            ->from($db->quoteName('#__debtticker_debtlogsdaily'));
+            ->from($db->quoteName('#__debtticker_debtlogsdaily'))
+            ->where($db->quoteName('rate_date') . ' >= ' . $db->quote('2011-11-08'));
       
       $db->setQuery($query);
       
@@ -31,6 +32,19 @@ class DebtTickerModelDebtLogsMinutes extends JModelItem
 
       $data = new stdClass();
       $data->comp_rate_val = round(((($total_sum * $rates['comp_interest_rate']) / 360) / MINUTES_IN_A_DAY) * $minutes, 2);
+
+      $query = $db->getQuery(true);
+      
+      $query->select(array('SUM(rate_val1) + SUM(rate_val2) + SUM(comp_rate_val)') )
+            ->from($db->quoteName('#__debtticker_debtlogsdaily'));
+      
+      $db->setQuery($query);
+      
+      $row = $db->loadRow();
+      
+      $total_sum = 0;
+      
+      if(!empty($row[0])) $total_sum = $row[0];
       $data->debt = round($total_sum + $data->comp_rate_val, 2);
       
       $result = $db->insertObject('#__debtticker_debtlogsminutes', $data);

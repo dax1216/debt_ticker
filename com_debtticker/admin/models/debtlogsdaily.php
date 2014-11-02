@@ -22,7 +22,7 @@ class DebtTickerModelDebtLogsDaily extends JModelList
         $query
             ->select($db->quoteName(array('id', 'rate', 'rate_val1', 'rate_val2', 'comp_rate', 'comp_rate_val', 'rate_date', 'debt')))
             ->from('#__debtticker_debtlogsdaily')
-            ->order('log_date DESC');
+            ->order('id DESC');
 
         return $query;
     }
