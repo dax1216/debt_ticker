@@ -42,8 +42,8 @@ class DebtTickerController extends JControllerLegacy
       $obj->rate_date = date('Y-m-d');
       $obj->rate = $rates['interest_rate'];
       $obj->comp_rate = $rates['comp_interest_rate'];
-      $obj->rate_val1 = round(BASIS_RATE1 * (1/360) * $rates['interest_rate'], 2);
-      $obj->rate_val2 = round(BASIS_RATE2 * (1/360) * $rates['interest_rate'], 2);
+      $obj->rate_val1 = BASIS_RATE1 * (1/360) * $rates['interest_rate'];
+      $obj->rate_val2 = BASIS_RATE2 * (1/360) * $rates['interest_rate'];
       
       $model->insertDailyLog($obj);
       

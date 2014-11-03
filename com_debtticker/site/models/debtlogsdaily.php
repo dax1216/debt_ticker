@@ -30,7 +30,7 @@ class DebtTickerModelDebtLogsDaily extends JModelItem
       
       if(!empty($row[0])) $total_sum = $row[0];
       
-      $data->comp_rate_val = round(($total_sum + $data->rate_val1 + $data->rate_val2) * $data->comp_rate / 360, 2);
+      $data->comp_rate_val = ($total_sum + $data->rate_val1 + $data->rate_val2) * $data->comp_rate / 360;
       
       $query = $db->getQuery(true);
       
