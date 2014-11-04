@@ -12,7 +12,7 @@ CREATE TABLE `#__debtticker_debtlogsminutes` (
 CREATE TABLE `#__debtticker_debtlogsdaily` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rate` DECIMAL(11,4) NOT NULL,
-  `rate_val1` DECIMAL(15,10) NOT NULL,
+  `rate_val1` DECIMAL(20,10) NOT NULL,
   `rate_val2` DECIMAL(15,10) NOT NULL,
   `comp_rate` DECIMAL(11,4) NOT NULL,
   `comp_rate_val` DECIMAL(15,10) NOT NULL,
